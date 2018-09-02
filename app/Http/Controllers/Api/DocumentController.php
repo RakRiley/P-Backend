@@ -28,17 +28,17 @@ class DocumentController extends BaseController
     }
 
     public function getDocument() {
-        $item = Document::join('date', 'document.date_id', '=', 'date.id')->select('document.*', 'date.*')->where('document.status', 'U')->where('date.year_time', '=', date("Y"))->get();
+        $item = Document::join('date', 'document.date_id', '=', 'date.id')->select('document.*', 'date.*')->where('document.status', 'U')->where('date.year_time', '=', date("Y")+543)->get();
         return $item;
     }
 
     public function getDocumentC() {
-        $item = Document::join('date', 'document.date_id', '=', 'date.id')->select('document.*', 'date.*')->where('document.status', 'C')->where('date.year_time', '=', date("Y"))->get();
+        $item = Document::join('date', 'document.date_id', '=', 'date.id')->select('document.*', 'date.*')->where('document.status', 'C')->where('date.year_time', '=', date("Y")+543)->get();
         return $item;
     } 
 
     public function getDocumentnumN() {
-        $item = Document::join('date', 'document.date_id', '=', 'date.id')->select('document.*', 'date.*')->where('date.year_time', '=', date("Y"))->get();
+        $item = Document::join('date', 'document.date_id', '=', 'date.id')->select('document.*', 'date.*')->where('date.year_time', '=', date("Y")+543)->get();
         return $item;
     }
 
@@ -56,6 +56,12 @@ class DocumentController extends BaseController
     public function getDocfromYear() {
         $year = $_GET['year'];
         $item = Document::join('date', 'document.date_id', '=', 'date.id')->select('document.*', 'date.*')->where('date.year_time', '=', $year)->where('document.status', 'U')->get();
+        return $item;
+    }
+
+    public function getDocfrommonth() {
+        $mounth = $_GET['mounth'];
+        $item = Document::join('date', 'document.date_id', '=', 'date.id')->select('document.*', 'date.*')->where('date.mounth_time', '=', $mounth)->where('document.status', 'U')->get();
         return $item;
     }
 

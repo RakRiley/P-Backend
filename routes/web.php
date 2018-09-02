@@ -37,7 +37,10 @@ $router->put('/putUser/{id}','Api\UserController@putUser');
 
 //Date
 $router->get('/getDate', 'Api\DateController@getDate');
+$router->get('/getNewDate', 'Api\DateController@getNewDate');
 $router->get('/getNumYear', 'Api\DateController@getNumYear');
+$router->get('/getNumMounth', 'Api\DateController@getNumMounth');
+$router->get('/getallYear', 'Api\DateController@getallYear');
 $router->post('/postDate','Api\DateController@postDate');
 $router->delete('/deleteDate/{id}','Api\DateController@deleteDate');
 $router->put('/putDate/{id}','Api\DateController@putDate');
@@ -48,6 +51,7 @@ $router->get('/getDocumentC', 'Api\DocumentController@getDocumentC');
 $router->get('/getDocumentDistinct', 'Api\DocumentController@getDocumentDistinct');
 $router->get('/getNumBook', 'Api\DocumentController@getNumBook');
 $router->get('/getDocfromYear', 'Api\DocumentController@getDocfromYear');
+$router->get('/getDocfrommonth', 'Api\DocumentController@getDocfrommonth');
 $router->get('/getDatepicker', 'Api\DocumentController@getDatepicker');
 $router->get('/getDocumentnumN', 'Api\DocumentController@getDocumentnumN');
 $router->get('/getNumber_of_book_repeatedly', 'Api\DocumentController@getNumber_of_book_repeatedly');
@@ -67,6 +71,11 @@ $router->post('/postSigner','Api\SignerController@postSigner');
 $router->delete('/deleteSigner/{id}','Api\SignerController@deleteSigner');
 $router->put('/putSigner/{id}','Api\SignerController@putSigner');
 
-
-// foradmin
+//foradmin
 $router->get('/getAdmin', 'Api\AdminController@getAdmin');
+
+//Year_peg
+$router->get('/getYear_peg', 'Api\Year_pegController@getYear_peg');
+$router->post('/postYear_peg','Api\Year_pegController@postYear_peg');
+$router->delete('/deleteYear_peg/{id}','Api\Year_pegController@deleteYear_peg');
+$router->put('/putYear_peg/{id}','Api\Year_pegController@putYear_peg');

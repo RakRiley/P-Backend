@@ -32,9 +32,39 @@ class DateController extends BaseController
         return $item;
     }
 
+    public function getNewDate() {
+        $item = Date::where('year_time', '=', (string)date("Y")+1)->get();
+        return $item;
+    }
+
     public function getNumYear() {
         $item = Date::select('year_time')->groupBy('year_time')->get();
         return $item;
+    }
+
+    public function getNumMounth() {
+        $item = Date::select('mounth_time')->groupBy('mounth_time')->get();
+        return $item;
+    }
+
+    public function getallYear(){
+        $totalyear = [];
+        $item = Date::select("year")
+                ->groupBy("year")
+                ->get();
+        foreach ($item as &$value) {
+            $newitem;
+            $newitem = Date::select("year")
+                ->where("year" , "=" , $value->year)
+                ->count();
+            $object = (object) [
+                'year' => $value->year,
+                'total' => $newitem,
+            ];
+            array_push($totalyear, $object);
+        }
+        
+        return $totalyear;
     }
 
     public function deleteDate($id){
