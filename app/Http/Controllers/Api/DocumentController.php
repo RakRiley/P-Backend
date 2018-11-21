@@ -47,6 +47,16 @@ class DocumentController extends BaseController
         return $item;
     }
 
+    public function getStatusC() {
+        $item = Document::where('status', 'C')->count();
+        return $item;
+    }
+
+    public function getStatusU() {
+        $item = Document::where('status', 'U')->count();
+        return $item;
+    }
+
     public function getNumBook() {
         $numbook = $_GET['numbook'];
         $item = Document::where('status', 'U')->where('number_of_book', 'like', $numbook.'%')->groupBy('number_of_book')->orderBy('number_of_book', 'desc')->limit(1)->get();

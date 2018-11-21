@@ -15,7 +15,9 @@ class UserController extends BaseController
             'lastname' => 'required',
             'firstname' => 'required',
             'Role' => 'required',
-            'prefix' => 'required'
+            'prefix' => 'required',
+            'Telephone' => 'required',
+            'FacultyName_TH' => 'required'
         ]);
 
         $item = User::create($request->all());

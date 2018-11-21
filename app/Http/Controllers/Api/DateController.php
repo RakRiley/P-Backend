@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use App\Model\Date;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class DateController extends BaseController
 {
     public function postDate(Request $request){
@@ -44,6 +44,18 @@ class DateController extends BaseController
 
     public function getNumMounth() {
         $item = Date::select('mounth_time')->groupBy('mounth_time')->get();
+        return $item;
+    }
+    
+    public function getCountMounth(Request $request) {
+        $year = (string)date('Y') + 543;
+        if(($request->has('year'))){
+            $year = $request->year;
+        }
+        $item = Date::selectRaw("mounth_time,count('id') as books")
+        ->where('year_time', '=', $year)
+        ->groupBy('mounth_time')
+        ->get();
         return $item;
     }
 
