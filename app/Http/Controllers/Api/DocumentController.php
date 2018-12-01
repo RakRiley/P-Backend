@@ -27,8 +27,53 @@ class DocumentController extends BaseController
         return $item;
     }
 
-    public function getDocument() {
-        $item = Document::join('date', 'document.date_id', '=', 'date.id')->select('document.*', 'date.*')->where('document.status', 'U')->where('date.year_time', '=', date("Y")+543)->get();
+    public function getDocument(){
+        $item = Document::join('date', 'document.date_id', '=', 'date.id')->select('document.*', 'date.*')->where('document.status', 'U')->where('date.year_time', '=', date("Y")+543)->get();        
+        return $item;
+    }
+
+    public function postDocumentsearch(Request $request) {
+        $item = [];
+        
+        
+   
+        if($request->type==''){
+            $item = Document::join('date', 'document.date_id', '=', 'date.id')->select('document.*', 'date.*')->where('document.status', 'U')->where('date.year_time', '=', date("Y")+543)->get();        
+        }else{
+            $item = Document::join('date', 'document.date_id', '=', 'date.id')
+            ->select('document.*', 'date.*')
+            ->where('document.status', 'U')
+            ->where('date.year_time', '=', date("Y")+543)
+            ->where($request->type,'like','%'.$request->text.'%')
+            ->get();
+
+        }
+        // }else if($request->type=='number_of_book'){
+        //     $item = Document::join('date', 'document.date_id', '=', 'date.id')->select('document.*', 'date.*')
+        //     ->where('document.status', 'U')
+        //     ->where('date.year_time', '=', date("Y")+543)
+        //     ->where('document.number_of_book','like','%'.$request->text.'%')
+        //     ->get();
+        // }else if($request->type=='form'){
+        //     $item = Document::join('date', 'document.date_id', '=', 'date.id')->select('document.*', 'date.*')
+        //     ->where('document.status', 'U')
+        //     ->where('date.year_time', '=', date("Y")+543)
+        //     ->where('document.form','like','%'.$request->text.'%')
+        //     ->get();
+        // }else if($request->type=='sender'){
+        //     $item = Document::join('date', 'document.date_id', '=', 'date.id')->select('document.*', 'date.*')
+        //     ->where('document.status', 'U')
+        //     ->where('date.year_time', '=', date("Y")+543)
+        //     ->where('document.sender','like','%'.$request->text.'%')
+        //     ->get();
+        // }else if($request->type=='name'){
+        //     $item = Document::join('date', 'document.date_id', '=', 'date.id')->select('document.*', 'date.*')
+        //     ->where('document.status', 'U')
+        //     ->where('date.year_time', '=', date("Y")+543)
+        //     ->where('document.name','like','%'.$request->text.'%')
+        //     ->get();
+        // }
+        
         return $item;
     }
 

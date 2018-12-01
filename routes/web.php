@@ -46,8 +46,9 @@ $router->post('/postDate','Api\DateController@postDate');
 $router->delete('/deleteDate/{id}','Api\DateController@deleteDate');
 $router->put('/putDate/{id}','Api\DateController@putDate');
 
-//Document
+//Document getDocument
 $router->get('/getDocument', 'Api\DocumentController@getDocument');
+$router->post('/postDocumentsearch', 'Api\DocumentController@postDocumentsearch');
 $router->get('/getDocumentC', 'Api\DocumentController@getDocumentC');
 $router->get('/getDocumentDistinct', 'Api\DocumentController@getDocumentDistinct');
 $router->get('/getNumBook', 'Api\DocumentController@getNumBook');
