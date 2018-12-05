@@ -19,10 +19,11 @@ class DateController extends BaseController
             'second' => 'required',
             'day_time'=>'required',
             'mounth_time'=>'required',
-            'year_time'=>'required'
+            'year_time'=>'required',
+            'all_date'=>'required'
            
         ]);
-
+        
         $item = Date::create($request->all());
         return $item;
     }
@@ -31,6 +32,11 @@ class DateController extends BaseController
         $item = Date::all();
         return $item;
     }
+
+    // public function postAll_date() {
+    //     $item = Date::select('all_date','=','year_time','mounth_time','day_time');
+    //     return $item;
+    // }
 
     public function getNewDate() {
         $item = Date::where('year_time', '=', (string)date("Y")+1)->get();

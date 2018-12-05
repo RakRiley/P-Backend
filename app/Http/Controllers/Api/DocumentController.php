@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use App\Model\Document;
 use Illuminate\Http\Request;
+
+
 class DocumentController extends BaseController
 {
     public function postDocument(Request $request){
@@ -34,20 +36,20 @@ class DocumentController extends BaseController
 
     public function postDocumentsearch(Request $request) {
         $item = [];
-        
-        
-   
         if($request->type==''){
-            $item = Document::join('date', 'document.date_id', '=', 'date.id')->select('document.*', 'date.*')->where('document.status', 'U')->where('date.year_time', '=', date("Y")+543)->get();        
+            $item = Document::join('date', 'document.date_id', '=', 'date.id')->select('document.*', 'date.*')->where('document.status', 'U')->where('date.year_time', '=', date("Y")+543);        
         }else{
             $item = Document::join('date', 'document.date_id', '=', 'date.id')
             ->select('document.*', 'date.*')
             ->where('document.status', 'U')
             ->where('date.year_time', '=', date("Y")+543)
-            ->where($request->type,'like','%'.$request->text.'%')
-            ->get();
-
+            ->where($request->type,'like','%'.$request->text.'%');
         }
+        if(isset($request->len)){
+            $item = $item->where('date.all_date', '>=', $request->len['fromDate'])
+            ->where('date.all_date', '<=', $request->len['toDate']);
+        }
+        $item = $item->get();
         // }else if($request->type=='number_of_book'){
         //     $item = Document::join('date', 'document.date_id', '=', 'date.id')->select('document.*', 'date.*')
         //     ->where('document.status', 'U')
@@ -122,13 +124,17 @@ class DocumentController extends BaseController
 
     public function getDatepicker() {
         $num = $_GET['numbook'];
-        $item1 = Document::join('date', 'document.date_id', '=', 'date.id')->select('date.*')->where('document.number_of_book', '=', $num-1)->get();
-        $item2 = Document::join('date', 'document.date_id', '=', 'date.id')->select('date.*')->where('document.number_of_book', '=', $num+1)->get();
+        $item1 = Document::join('date', 'document.date_id', '=', 'date.id')
+        ->select('date.*')->where('document.number_of_book', '=', $num-1)->get();
+        $item2 = Document::join('date', 'document.date_id', '=', 'date.id')
+        ->select('date.*')->where('document.number_of_book', '=', $num+1)->get();
         if (count($item1) == 0) {
-            $item1 = Document::join('date', 'document.date_id', '=', 'date.id')->select('date.*')->where('document.number_of_book', '=', $num)->get();
+            $item1 = Document::join('date', 'document.date_id', '=', 'date.id')
+            ->select('date.*')->where('document.number_of_book', '=', $num)->get();
         }
         if (count($item2) == 0) {
-            $item2 = Document::join('date', 'document.date_id', '=', 'date.id')->select('date.*')->where('document.number_of_book', '=', $num)->get();
+            $item2 = Document::join('date', 'document.date_id', '=', 'date.id')
+            ->select('date.*')->where('document.number_of_book', '=', $num)->get();
         }
         $item = $item1->merge($item2);
         return $item;

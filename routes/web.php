@@ -43,6 +43,7 @@ $router->get('/getNumMounth', 'Api\DateController@getNumMounth');
 $router->get('/getCountMounth', 'Api\DateController@getCountMounth');
 $router->get('/getallYear', 'Api\DateController@getallYear');
 $router->post('/postDate','Api\DateController@postDate');
+// $router->post('/postAll_date','Api\DateController@postAll_date');
 $router->delete('/deleteDate/{id}','Api\DateController@deleteDate');
 $router->put('/putDate/{id}','Api\DateController@putDate');
 
